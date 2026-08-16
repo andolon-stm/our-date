@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Date For Us 💌</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    box-sizing:border-box;
+    font-family:"Pacifico",cursive !important;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+
+body{
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    transition:background 1s ease;
+}
+
+
+/* =========================
+   CHAPTER THEMES
+========================= */
+
+body.theme1{
+    --main:#d8b4ff;
+    --accent:#f0dcff;
+    --button:#60418b;
+    --button2:#8a61b8;
+    --border:#a77bd0;
+    --soft:#d2b8e9;
+    --card:rgba(16,8,30,.86);
+
+    background:
+    radial-gradient(circle at 50% 15%,#54357a,transparent 30%),
+    linear-gradient(145deg,#05020b,#170b29,#27123d,#05020b);
+}
+
+body.theme2{
+    --main:#ffadc2;
+    --accent:#ffe0e8;
+    --button:#873c59;
+    --button2:#b95b79;
+    --border:#dc829c;
+    --soft:#f0b9c8;
+    --card:rgba(39,8,20,.86);
+
+    background:
+    radial-gradient(circle at 50% 40%,#743347,transparent 30%),
+    linear-gradient(145deg,#120309,#320d1b,#4b1528,#100207);
+}
+
+body.theme3{
+    --main:#f6cf8d;
+    --accent:#fff0bd;
+    --button:#8b642c;
+    --button2:#bc8b3e;
+    --border:#d5ae67;
+    --soft:#efd19a;
+    --card:rgba(39,26,8,.86);
+
+    background:
+    radial-gradient(circle at 50% 25%,#795d28,transparent 32%),
+    linear-gradient(145deg,#100b03,#302007,#4a310c,#0b0702);
+}
+
+body.theme4{
+    --main:#c0d9ff;
+    --accent:#e9f2ff;
+    --button:#405d80;
+    --button2:#6688ad;
+    --border:#91acd0;
+    --soft:#c9dafa;
+    --card:rgba(8,17,32,.87);
+
+    background:
+    radial-gradient(circle at 50% 35%,#354e70,transparent 32%),
+    linear-gradient(145deg,#050911,#101d32,#172b47,#04070d);
+}
+
+body.theme5{
+    --main:#b4e0bd;
+    --accent:#e0f4e3;
+    --button:#416b51;
+    --button2:#608d6e;
+    --border:#83b58f;
+    --soft:#b9dfc1;
+    --card:rgba(8,27,16,.86);
+
+    background:
+    radial-gradient(circle at 20% 70%,#315c43,transparent 28%),
+    radial-gradient(circle at 80% 20%,#304d43,transparent 27%),
+    linear-gradient(145deg,#030a06,#0b2015,#153522,#030805);
+}
+
+body.theme6{
+    --main:#e7b989;
+    --accent:#ffe3c0;
+    --button:#805333;
+    --button2:#a76d45;
+    --border:#c49468;
+    --soft:#e2b98d;
+    --card:rgba(35,18,10,.87);
+
+    background:
+    radial-gradient(circle at 50% 75%,#74462b,transparent 28%),
+    linear-gradient(145deg,#100704,#27130b,#392014,#0b0503);
+}
+
+body.theme7{
+    --main:#e7a8bd;
+    --accent:#ffe0c4;
+    --button:#7c405d;
+    --button2:#a55b77;
+    --border:#c77c9b;
+    --soft:#e8b3c4;
+    --card:rgba(30,11,25,.87);
+
+    background:
+    radial-gradient(circle at 50% 25%,#70405d,transparent 32%),
+    linear-gradient(145deg,#080307,#21101d,#3a1829,#090307);
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.sky{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 9px white;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.15;
+        transform:scale(.6);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.4);
+    }
+}
+
+.light{
+    position:fixed;
+    width:180px;
+    height:350px;
+    bottom:-180px;
+    pointer-events:none;
+    z-index:2;
+    filter:blur(27px);
+
+    background:
+    linear-gradient(to top,var(--main),transparent);
+
+    opacity:.18;
+}
+
+.light.one{
+    left:0;
+    transform:rotate(-20deg);
+}
+
+.light.two{
+    left:28%;
+    transform:rotate(-7deg);
+}
+
+.light.three{
+    right:28%;
+    transform:rotate(7deg);
+}
+
+.light.four{
+    right:0;
+    transform:rotate(20deg);
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    position:relative;
+    z-index:10;
+
+    width:92%;
+    max-width:455px;
+    max-height:91vh;
+
+    overflow-y:auto;
+
+    padding:32px 23px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+    0 0 45px rgba(0,0,0,.2),
+    0 25px 80px rgba(0,0,0,.65),
+    inset 0 0 35px rgba(255,255,255,.025);
+
+    animation:cardIn .8s ease;
+}
+
+.card::-webkit-scrollbar{
+    width:4px;
+}
+
+.card::-webkit-scrollbar-thumb{
+    background:var(--border);
+    border-radius:10px;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:scale(.91) translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+
+/* =========================
+   SEVEN STARS
+========================= */
+
+.seven-stars{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin-bottom:15px;
+}
+
+.seven-stars span{
+    color:var(--main);
+    font-size:13px;
+
+    text-shadow:
+    0 0 10px var(--main);
+
+    animation:starPulse 2s infinite alternate;
+}
+
+.seven-stars span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.seven-stars span:nth-child(3){
+    animation-delay:.4s;
+}
+
+.seven-stars span:nth-child(4){
+    animation-delay:.6s;
+}
+
+.seven-stars span:nth-child(5){
+    animation-delay:.8s;
+}
+
+.seven-stars span:nth-child(6){
+    animation-delay:1s;
+}
+
+.seven-stars span:nth-child(7){
+    animation-delay:1.2s;
+}
+
+@keyframes starPulse{
+    from{
+        opacity:.25;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.chapter{
+    font-size:14px;
+    letter-spacing:2px;
+    color:var(--main);
+
+    margin-bottom:14px;
+
+    text-shadow:
+    0 0 12px var(--main);
+}
+
+h1{
+    font-size:30px;
+    font-weight:normal;
+    line-height:1.5;
+
+    color:var(--accent);
+
+    text-shadow:
+    0 0 18px var(--main);
+}
+
+p{
+    font-size:16px;
+    line-height:2;
+    color:#eee7ed;
+    margin:14px 0;
+}
+
+strong{
+    color:var(--accent);
+}
+
+i{
+    color:var(--soft);
+}
+
+.divider{
+    width:72%;
+    height:1px;
+    margin:20px auto;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        var(--main),
+        transparent
+    );
+
+    opacity:.7;
+}
+
+
+/* =========================
+   ROMANTIC SYMBOL
+========================= */
+
+.big-heart{
+    font-size:53px;
+    margin:8px;
+
+    filter:
+    drop-shadow(0 0 12px var(--main));
+
+    animation:
+    romanticPulse 2s infinite ease-in-out;
+}
+
+@keyframes romanticPulse{
+    0%,100%{
+        transform:scale(1) translateY(0);
+    }
+
+    50%{
+        transform:scale(1.10) translateY(-3px);
+    }
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+    font-size:15px;
+    line-height:1.7;
+
+    padding:11px 22px;
+    margin:7px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.next,
+.yes{
+    color:white;
+
+    border:
+    1px solid var(--border);
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--button),
+        var(--button2)
+    );
+
+    box-shadow:
+    0 0 18px rgba(255,255,255,.08);
+}
+
+.next:hover,
+.yes:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 28px var(--main);
+}
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+.no{
+    position:absolute;
+
+    color:#ddd;
+
+    background:
+    rgba(30,20,30,.9);
+
+    border:
+    1px solid var(--border);
+
+    z-index:30;
+}
+
+.no-area{
+    position:relative;
+    height:155px;
+}
+
+#message{
+    min-height:28px;
+    color:var(--main);
+    line-height:2;
+}
+
+
+/* =========================
+   CHOICES
+========================= */
+
+.choice{
+    width:90%;
+
+    color:#eee;
+
+    background:
+    rgba(20,20,20,.35);
+
+    border:
+    1px solid var(--border);
+}
+
+.choice:hover{
+    transform:translateY(-3px);
+
+    background:
+    var(--button);
+
+    box-shadow:
+    0 0 20px var(--main);
+}
+
+.choice.selected{
+    background:
+    linear-gradient(
+        135deg,
+        var(--button),
+        var(--button2)
+    );
+
+    box-shadow:
+    0 0 22px var(--main);
+}
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar{
+    max-width:330px;
+    margin:15px auto;
+}
+
+.month{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.month button{
+    padding:5px 12px;
+
+    color:var(--accent);
+
+    background:
+    var(--button);
+
+    border:
+    1px solid var(--border);
+}
+
+.month-name{
+    color:var(--accent);
+    font-size:18px;
+}
+
+.weekdays,
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:5px;
+}
+
+.weekdays div{
+    font-size:10px;
+
+    color:var(--soft);
+
+    padding:7px 0;
+}
+
+.day{
+    padding:9px 0;
+
+    font-size:13px;
+
+    color:#e7e0e8;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.day:hover{
+    background:var(--button);
+}
+
+.day.selected{
+    background:var(--button2);
+
+    color:white;
+
+    box-shadow:
+    0 0 15px var(--main);
+}
+
+.day.disabled{
+    color:#514b53;
+    cursor:not-allowed;
+}
+
+
+/* =========================
+   DATE INFO
+========================= */
+
+.selected-info{
+    padding:10px;
+    margin:12px 0;
+
+    color:var(--soft);
+
+    border-radius:8px;
+
+    background:
+    rgba(0,0,0,.25);
+
+    border:
+    1px solid var(--border);
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+.time-title{
+    color:var(--main);
+
+    margin-top:20px;
+
+    font-size:18px;
+}
+
+.time-row{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:5px;
+
+    flex-wrap:wrap;
+}
+
+select{
+    padding:8px;
+
+    color:#eee;
+
+    background:
+    var(--button);
+
+    border:
+    1px solid var(--border);
+
+    border-radius:7px;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   FINAL PAGE
+========================= */
+
+.final-title{
+    font-size:32px;
+
+    color:var(--accent);
+
+    text-shadow:
+    0 0 20px var(--main);
+}
+
+.final-box{
+    margin-top:18px;
+
+    padding:16px;
+
+    text-align:left;
+
+    border-radius:13px;
+
+    background:
+    rgba(0,0,0,.25);
+
+    border:
+    1px solid var(--border);
+}
+
+.final-item{
+    padding:12px 4px;
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.1);
+
+    color:#eee;
+
+    line-height:1.8;
+}
+
+.final-item:last-child{
+    border-bottom:0;
+}
+
+.final-item strong{
+    color:var(--accent);
+}
+
+.small{
+    font-size:14px;
+
+    color:#c7bcc9;
+
+    line-height:2.1;
+}
+
+
+/* =========================
+   FLOATING
+========================= */
+
+.floating{
+    position:fixed;
+
+    bottom:-30px;
+
+    z-index:100;
+
+    pointer-events:none;
+
+    animation:
+    floatUp 6s linear forwards;
+}
+
+@keyframes floatUp{
+    to{
+        transform:
+        translateY(-110vh)
+        rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+.sparkle{
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:100;
+
+    color:var(--main);
+
+    animation:
+    sparkleOut 1.5s forwards;
+}
+
+@keyframes sparkleOut{
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+        scale(2)
+        translateY(-30px);
+    }
+}
+
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+    display:none;
+}
+
+</style>
+</head>
+
+
+<body class="theme1">
+
+
+<!-- BACKGROUND -->
+
+<div class="sky" id="sky"></div>
+
+<div class="light one"></div>
+<div class="light two"></div>
+<div class="light three"></div>
+<div class="light four"></div>
+
+
+<!-- MAIN CARD -->
+
+<div class="card">
+
+
+<!-- =========================
+     CHAPTER 1
+========================= -->
+
+<div id="page1">
+
+    <div class="seven-stars">
+
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+
+    </div>
+
+
+    <div class="chapter">
+        Chapter 1
+    </div>
+
+
+    <div class="big-heart">
+        💌
+    </div>
+
+
+    <h1>
+        A Little Question
+    </h1>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        I know u have your own
+        little world of songs,
+        stars and quiet nights…
+
+        <br><br>
+
+        So I thought I'd make
+        a tiny world for u too.
+
+        ✨
+
+        <br><br>
+
+        And there's something
+        I've been wanting to ask u…
+
+    </p>
+
+
+    <button
+        class="next"
+        onclick="goToPage(2)">
+
+        Come closer →
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER 2
+========================= -->
+
+<div id="page2" class="hidden">
+
+    <div class="chapter">
+        Chapter 2
+    </div>
+
+
+    <div class="big-heart">
+        ♡
+    </div>
+
+
+    <h1>
+        Just One Question
+    </h1>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        Okay…
+
+        <br><br>
+
+        I've rehearsed this
+        enough in my head.
+
+        🥹
+
+        <br><br>
+
+        <strong>
+            Would u let me take u on a date?
+        </strong>
+
+        💗
+
+        <br><br>
+
+        <i>
+            Just u & me, and a little time
+            away from everything else.
+        </i>
+
+    </p>
+
+
+    <div id="message"></div>
+
+
+    <div class="no-area">
+
+
+        <button
+            class="yes"
+            id="yesButton"
+            onclick="yesClicked()"
+            style="
+            position:absolute;
+            left:23%;
+            top:40px;
+            ">
+
+            YES 💗
+
+        </button>
+
+
+        <button
+            class="no"
+            id="noButton"
+            onmouseenter="runAway()"
+            ontouchstart="runAway()"
+            onclick="runAway()">
+
+            NO 🙃
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER 3
+========================= -->
+
+<div id="page3" class="hidden">
+
+    <div class="seven-stars">
+
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+
+    </div>
+
+
+    <div class="chapter">
+        Chapter 3
+    </div>
+
+
+    <div class="big-heart">
+        ✨
+    </div>
+
+
+    <h1>
+        I Knew It
+    </h1>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        See?
+
+        <br><br>
+
+        Somehow, I always knew
+        you'd say yes.
+
+        🤭
+
+        <br><br>
+
+        Now let's make this little
+        story of ours real.
+
+        <br><br>
+
+        <strong>
+            Let's plan our date.
+        </strong>
+
+    </p>
+
+
+    <button
+        class="next"
+        onclick="goToPage(4)">
+
+        Let's plan it →
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER 4
+========================= -->
+
+<div id="page4" class="hidden">
+
+    <div class="chapter">
+        Chapter 4
+    </div>
+
+
+    <div class="big-heart">
+        ∞
+    </div>
+
+
+    <h1>
+        When?
+    </h1>
+
+
+    <p>
+
+        Every good story
+        needs a day.
+
+        <br><br>
+
+        So…
+
+        <br>
+
+        <strong>
+            Which day should be ours?
+        </strong>
+
+        🤍
+
+    </p>
+
+
+    <div class="calendar">
+
+
+        <div class="month">
+
+            <button onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+
+            <div
+                class="month-name"
+                id="monthName">
+            </div>
+
+
+            <button onclick="changeMonth(1)">
+                ›
+            </button>
+
+        </div>
+
+
+        <div class="weekdays">
+
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+        </div>
+
+
+        <div
+            class="days"
+            id="calendarDays">
+        </div>
+
+    </div>
+
+
+    <div
+        class="selected-info"
+        id="dateInfo">
+
+        Pick a date 📅
+
+    </div>
+
+
+    <div class="time-title">
+        And what time? ⏰
+    </div>
+
+
+    <div class="time-row">
+
+
+        <select id="hour">
+
+            <option value="">
+                Hour
+            </option>
+
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+
+        </select>
+
+
+        :
+
+
+        <select id="minute">
+
+            <option value="">
+                Min
+            </option>
+
+            <option>00</option>
+            <option>15</option>
+            <option>30</option>
+            <option>45</option>
+
+        </select>
+
+
+        <select id="ampm">
+
+            <option value="">
+                AM/PM
+            </option>
+
+            <option>AM</option>
+            <option>PM</option>
+
+        </select>
+
+
+    </div>
+
+
+    <button
+        class="next"
+        onclick="dateNext()">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER 5
+========================= -->
+
+<div id="page5" class="hidden">
+
+    <div class="chapter">
+        Chapter 5
+    </div>
+
+
+    <div class="big-heart">
+        ⌁
+    </div>
+
+
+    <h1>
+        Where?
+    </h1>
+
+
+    <p>
+
+        Now…
+
+        <br><br>
+
+        <strong>
+            Where should we disappear
+            to for a little while?
+        </strong>
+
+        ✨
+
+    </p>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectPlace(
+            this,
+            'Somewhere quiet & cozy'
+        )">
+
+        Somewhere quiet & cozy
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectPlace(
+            this,
+            'Somewhere with a beautiful view'
+        )">
+
+        Somewhere with a beautiful view
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectPlace(
+            this,
+            'A cute little café'
+        )">
+
+        A cute little café
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectPlace(
+            this,
+            'You choose, I will follow'
+        )">
+
+        You choose, I'll follow
+
+    </button>
+
+
+    <br>
+
+
+    <button
+        class="next"
+        onclick="placeNext()">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER 6
+========================= -->
+
+<div id="page6" class="hidden">
+
+    <div class="chapter">
+        Chapter 6
+    </div>
+
+
+    <div class="big-heart">
+        ☕
+    </div>
+
+
+    <h1>
+        What Are We Eating?
+    </h1>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        One very serious question
+        before we continue…
+
+        😌
+
+        <br><br>
+
+        <strong>
+            What are we eating?
+        </strong>
+
+        🤎
+
+        <br><br>
+
+        Because talking about food
+        is basically part of the date.
+
+        😂
+
+    </p>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectFood(
+            this,
+            'Pizza'
+        )">
+
+        🍕 Pizza
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectFood(
+            this,
+            'Burger'
+        )">
+
+        🍔 Burger
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectFood(
+            this,
+            'Chinese'
+        )">
+
+        🍜 Chinese
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectFood(
+            this,
+            'Bangla Food'
+        )">
+
+        🍛 Bangla Food
+
+    </button>
+
+
+    <button
+        class="choice"
+        onclick="
+        selectFood(
+            this,
+            'Cafe & Dessert'
+        )">
+
+        ☕ Cafe & Dessert
+
+    </button>
+
+
+    <br>
+
+
+    <button
+        class="next"
+        onclick="foodNext()">
+
+        Show me our plan 🤎
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     FINAL CHAPTER
+========================= -->
+
+<div id="page7" class="hidden">
+
+    <div class="seven-stars">
+
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✦</span>
+
+    </div>
+
+
+    <div class="chapter">
+        Final Chapter
+    </div>
+
+
+    <div class="big-heart">
+        ♡
+    </div>
+
+
+    <div class="final-title">
+        We Have A Date
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        And just like that…
+
+        <br><br>
+
+        <strong>
+            our little plan is ready.
+        </strong>
+
+        🥹
+
+    </p>
+
+
+    <div class="final-box">
+
+
+        <div class="final-item">
+
+            📅
+
+            <strong id="finalDate"></strong>
+
+        </div>
+
+
+        <div class="final-item">
+
+            ⏰
+
+            <strong id="finalTime"></strong>
+
+        </div>
+
+
+        <div class="final-item">
+
+            📍
+
+            <strong id="finalPlace"></strong>
+
+        </div>
+
+
+        <div class="final-item">
+
+            🍜
+
+            <strong id="finalFood"></strong>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <p>
+
+        <i>
+
+            I don't know how this day
+            will turn out…
+
+            <br><br>
+
+            But I already know
+            one thing.
+
+            <br><br>
+
+            I'll be happy…
+
+            <br>
+
+            because I'll be spending it
+            with u.
+
+        </i>
+
+        💕
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            So… I'll see u then?
+        </strong>
+
+        🥹
+
+    </p>
+
+
+    <div class="divider"></div>
+
+
+    <p class="small">
+
+        7 little stars.
+
+        <br>
+
+        2 people.
+
+        <br>
+
+        1 little date.
+
+        <br><br>
+
+        <strong>and...</strong>
+
+        <br><br>
+
+        I don't know where this little
+        story takes us…
+
+        <br>
+
+        I just know I want to be there
+        with u. ♡
+
+    </p>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =========================
+   BACKGROUND STARS
+========================= */
+
+const sky =
+document.getElementById("sky");
+
+for(let i=0;i<80;i++){
+
+    const star =
+    document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+    Math.random()*100+"%";
+
+    star.style.top =
+    Math.random()*100+"%";
+
+    star.style.animationDelay =
+    Math.random()*3+"s";
+
+    sky.appendChild(star);
+}
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let selectedDate="";
+
+let selectedTime="";
+
+let selectedPlaceValue="";
+
+let selectedFoodValue="";
+
+let noCount=0;
+
+let currentMonth=
+new Date().getMonth();
+
+let currentYear=
+new Date().getFullYear();
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function goToPage(number){
+
+    for(let i=1;i<=7;i++){
+
+        document
+        .getElementById("page"+i)
+        .classList.add("hidden");
+
+    }
+
+    document
+    .getElementById("page"+number)
+    .classList.remove("hidden");
+
+    document.body.className=
+    "theme"+number;
+
+    const card=
+    document.querySelector(".card");
+
+    card.style.animation="none";
+
+    void card.offsetWidth;
+
+    card.style.animation=
+    "cardIn .8s ease";
+
+    if(number===3){
+
+        createSparkles();
+
+    }
+
+    if(number===7){
+
+        createHearts();
+
+        createSparkles();
+
+    }
+
+}
+
+
+/* =========================
+   YES
+========================= */
+
+function yesClicked(){
+
+    goToPage(3);
+
+    createHearts();
+
+}
+
+
+/* =========================
+   NO RUNS AWAY
+========================= */
+
+function runAway(){
+
+    noCount++;
+
+    const noButton=
+    document.getElementById("noButton");
+
+    const yesButton=
+    document.getElementById("yesButton");
+
+    const message=
+    document.getElementById("message");
+
+    const messages=[
+
+        "Wait… think about it 🥺",
+
+        "Are u really saying no? 😭",
+
+        "I don't believe u 👀",
+
+        "Why are u running from the question? 😭",
+
+        "Okay… I'll ask again 🥹",
+
+        "I have a feeling u're going to say yes 🤭",
+
+        "Just say YES already 🥺💗"
+
+    ];
+
+    message.innerText=
+    messages[
+        Math.min(
+            noCount-1,
+            messages.length-1
+        )
+    ];
+
+    yesButton.style.transform=
+    "scale("+
+    (1+noCount*.12)+
+    ")";
+
+    noButton.style.position=
+    "fixed";
+
+    const padding=20;
+
+    const maxX=
+    window.innerWidth-
+    noButton.offsetWidth-
+    padding;
+
+    const maxY=
+    window.innerHeight-
+    noButton.offsetHeight-
+    padding;
+
+    const x=
+    padding+
+    Math.random()*
+    Math.max(
+        1,
+        maxX-padding
+    );
+
+    const y=
+    padding+
+    Math.random()*
+    Math.max(
+        1,
+        maxY-padding
+    );
+
+    noButton.style.left=
+    x+"px";
+
+    noButton.style.top=
+    y+"px";
+
+}
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+function renderCalendar(){
+
+    const container=
+    document.getElementById(
+        "calendarDays"
+    );
+
+    const monthName=
+    document.getElementById(
+        "monthName"
+    );
+
+    const firstDate=
+    new Date(
+        currentYear,
+        currentMonth,
+        1
+    );
+
+    const firstDay=
+    firstDate.getDay();
+
+    const totalDays=
+    new Date(
+        currentYear,
+        currentMonth+1,
+        0
+    ).getDate();
+
+    const months=[
+
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+
+    ];
+
+    monthName.innerText=
+    months[currentMonth]+
+    " "+
+    currentYear;
+
+    container.innerHTML="";
+
+    for(let i=0;i<firstDay;i++){
+
+        const empty=
+        document.createElement("div");
+
+        container.appendChild(empty);
+
+    }
+
+    for(
+        let day=1;
+        day<=totalDays;
+        day++
+    ){
+
+        const button=
+        document.createElement("div");
+
+        button.className="day";
+
+        button.innerText=day;
+
+        const today=
+        new Date();
+
+        today.setHours(0,0,0,0);
+
+        const date=
+        new Date(
+            currentYear,
+            currentMonth,
+            day
+        );
+
+        if(date<today){
+
+            button.classList.add(
+                "disabled"
+            );
+
+        }
+
+        else{
+
+            button.onclick=
+            function(){
+
+                chooseDate(
+                    date,
+                    button
+                );
+
+            };
+
+        }
+
+        container.appendChild(button);
+
+    }
+
+}
+
+
+/* =========================
+   CHANGE MONTH
+========================= */
+
+function changeMonth(change){
+
+    currentMonth+=change;
+
+    if(currentMonth>11){
+
+        currentMonth=0;
+
+        currentYear++;
+
+    }
+
+    if(currentMonth<0){
+
+        currentMonth=11;
+
+        currentYear--;
+
+    }
+
+    renderCalendar();
+
+}
+
+
+/* =========================
+   CHOOSE DATE
+========================= */
+
+function chooseDate(
+    date,
+    button
+){
+
+    document
+    .querySelectorAll(".day")
+    .forEach(
+        function(b){
+
+            b.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+    button.classList.add(
+        "selected"
+    );
+
+    const months=[
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+    selectedDate=
+    date.getDate()+
+    " "+
+    months[date.getMonth()]+
+    " "+
+    date.getFullYear();
+
+    document
+    .getElementById("dateInfo")
+    .innerText=
+    "📅 "+
+    selectedDate;
+
+}
+
+
+/* =========================
+   DATE NEXT
+========================= */
+
+function dateNext(){
+
+    if(selectedDate===""){
+
+        alert(
+            "Pick a date first 🥺📅"
+        );
+
+        return;
+
+    }
+
+    const hour=
+    document.getElementById(
+        "hour"
+    ).value;
+
+    const minute=
+    document.getElementById(
+        "minute"
+    ).value;
+
+    const ampm=
+    document.getElementById(
+        "ampm"
+    ).value;
+
+    if(
+        hour==="" ||
+        minute==="" ||
+        ampm===""
+    ){
+
+        alert(
+            "And don't forget the time 🥺⏰"
+        );
+
+        return;
+
+    }
+
+    selectedTime=
+    hour+
+    ":"+
+    minute+
+    " "+
+    ampm;
+
+    goToPage(5);
+
+}
+
+
+/* =========================
+   PLACE
+========================= */
+
+function selectPlace(
+    button,
+    value
+){
+
+    selectedPlaceValue=
+    value;
+
+    document
+    .querySelectorAll(
+        "#page5 .choice"
+    )
+    .forEach(
+        function(btn){
+
+            btn.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+    button.classList.add(
+        "selected"
+    );
+
+}
+
+
+function placeNext(){
+
+    if(
+        selectedPlaceValue===""
+    ){
+
+        alert(
+            "Tell me where we're going first 🥺📍"
+        );
+
+        return;
+
+    }
+
+    goToPage(6);
+
+}
+
+
+/* =========================
+   FOOD
+========================= */
+
+function selectFood(
+    button,
+    value
+){
+
+    selectedFoodValue=
+    value;
+
+    document
+    .querySelectorAll(
+        "#page6 .choice"
+    )
+    .forEach(
+        function(btn){
+
+            btn.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+    button.classList.add(
+        "selected"
+    );
+
+}
+
+
+function foodNext(){
+
+    if(
+        selectedFoodValue===""
+    ){
+
+        alert(
+            "We need food too 😭🍜"
+        );
+
+        return;
+
+    }
+
+    document
+    .getElementById(
+        "finalDate"
+    )
+    .innerText=
+    selectedDate;
+
+    document
+    .getElementById(
+        "finalTime"
+    )
+    .innerText=
+    selectedTime;
+
+    document
+    .getElementById(
+        "finalPlace"
+    )
+    .innerText=
+    selectedPlaceValue;
+
+    document
+    .getElementById(
+        "finalFood"
+    )
+    .innerText=
+    selectedFoodValue;
+
+    goToPage(7);
+
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHearts(){
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(
+            function(){
+
+                const heart=
+                document.createElement(
+                    "div"
+                );
+
+                heart.className=
+                "floating";
+
+                heart.innerHTML=
+                Math.random()>.4
+                ? "♡"
+                : "✦";
+
+                heart.style.left=
+                Math.random()*100+
+                "vw";
+
+                heart.style.fontSize=
+                (
+                    15+
+                    Math.random()*17
+                )+
+                "px";
+
+                heart.style.animationDuration=
+                (
+                    3+
+                    Math.random()*4
+                )+
+                "s";
+
+                document.body.appendChild(
+                    heart
+                );
+
+                setTimeout(
+                    function(){
+
+                        heart.remove();
+
+                    },
+                    7000
+                );
+
+            },
+            i*100
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+function createSparkles(){
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(
+            function(){
+
+                const sparkle=
+                document.createElement(
+                    "div"
+                );
+
+                sparkle.className=
+                "sparkle";
+
+                sparkle.innerText=
+                "✦";
+
+                sparkle.style.left=
+                Math.random()*100+
+                "vw";
+
+                sparkle.style.top=
+                Math.random()*100+
+                "vh";
+
+                sparkle.style.fontSize=
+                (
+                    10+
+                    Math.random()*16
+                )+
+                "px";
+
+                document.body.appendChild(
+                    sparkle
+                );
+
+                setTimeout(
+                    function(){
+
+                        sparkle.remove();
+
+                    },
+                    1500
+                );
+
+            },
+            i*70
+        );
+
+    }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderCalendar();
+
+</script>
+
+</body>
+</html>
